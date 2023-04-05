@@ -11,7 +11,7 @@ class App extends React.Component {
     }
 
     updateData = () => {
-        this.setState({name: 'Mykola', age: 30, toggle: !this.state.toggle});
+        this.setState(prevState => ({name: 'Mykola', age: 30, toggle: !prevState.toggle}));
     }
 
     render() {
