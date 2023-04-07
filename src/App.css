@@ -13,6 +13,13 @@
   }
 }
 
+.centered-div {
+  top: 50%;
+  left: 50%;
+  border: aqua;
+  border-style: dashed;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
