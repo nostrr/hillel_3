@@ -4,32 +4,35 @@ import './App.css'
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {posts : []};
     }
 
     updateData = (resObject, e) => {
-        console.log(resObject, e);
-        console.log(this.state);
-        let tempObj =
-        {[resObject.id]: {
+        let updateItem = {
                 id: resObject.id,
                 title: resObject.title,
                 body: resObject.body,
-                userId: resObject.userId}
+                userId: resObject.userId
         }
-
-        this.setState(tempObj,()=>{
-            console.log(this.state);
+        let index = this.state.posts.findIndex((element)=>{
+            return element.id === resObject.id
         });
+        let posts = this.state.posts;
+        posts[index] = updateItem;
+        this.setState(posts);
     }
 
     async componentDidMount() {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data = await response.json();
-        const objectData = data.reduce((acc, obj) => {
-            acc[obj.id] = obj;
-            return acc;
-        }, {});
-        this.setState(objectData);
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            const data = await response.json();
+            if(Array.isArray(data)) {
+                this.setState({posts: data}, () =>
+                    console.log(this.state));
+            }
+        }catch (e){
+            console.log(e);
+        }
     }
 
     addNewPost = () =>{
@@ -41,12 +44,14 @@ class App extends React.Component {
                 body: '',
                 userId: ''
             };
-        let myObject = addPropertyToFront(this.state, id, newPost)
-        this.setState(myObject);
+        this.setState({posts: [newPost,...this.state.posts]});
+    }
 
-        function addPropertyToFront(obj, key, value) {
-            return {[key]: value, ...obj};
-        }
+    deletePost =(id, e) =>{
+        let newPosts = this.state.posts.filter((element) =>{
+            return element.id!==id;
+        });
+        this.setState({posts: newPosts});
     }
 
     render() {
@@ -55,7 +60,7 @@ class App extends React.Component {
                 <button onClick={this.addNewPost}>Добавить новый</button>
                 <ul>
                     {this.state != null
-                        ? Object.values(this.state).map((item, index) =>
+                        ? this.state.posts.map((item, index) =>
                             index < 50 ? (
                                 <Post
                                     key={item.id}
@@ -63,7 +68,11 @@ class App extends React.Component {
                                     title={item.title}
                                     body={item.body}
                                     userId={item.userId}
-                                    onClick={this.updateData}></Post>
+                                    onClick={this.updateData}
+                                   // onDelete={(e)=>this.deletePost(item.id,e)}
+                                    onDelete={this.deletePost}
+                                >
+                                </Post>
                             ) : '')
                         : null}
                 </ul>
@@ -102,13 +111,23 @@ class Post extends React.PureComponent {
         this.setState({body : e.target.innerText});
     }
 
+    componentWillUnmount(){
+        console.log('Our Id', this.props.id);
+    }
+
+    onDelete =(e)=>{
+        if(window.confirm('Вы действительно хотите удалить элемент?')) {
+            this.props.onDelete(this.props.id, e);
+        }
+    }
+
     render() {
         return (
             <div>
                 <div>ID {this.props.id}</div>
                 <div style={{textAlign: "center"}} onInput={this.onChangeTitle} contentEditable="true">{this.props.title}</div>
                 <div contentEditable="true" onInput={this.onChangeBody}>{this.props.body}</div>
-                <button value={this.state} onClick={this.updateComponent}>Обновить</button> <button>Удалить</button>
+                <button value={this.state} onClick={this.updateComponent}>Обновить</button> <button onClick={this.onDelete}>Удалить</button>
             </div>
         )
     }
