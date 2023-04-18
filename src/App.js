@@ -15,7 +15,7 @@ class App extends React.Component {
                 userId: resObject.userId
         }
         let index = this.state.posts.findIndex((element)=>{
-            return element.id === resObject.id
+            return element.id === resObject.id;
         });
         let posts = this.state.posts;
         posts[index] = updateItem;
@@ -125,7 +125,7 @@ class Post extends React.PureComponent {
         return (
             <div>
                 <div>ID {this.props.id}</div>
-                <div style={{textAlign: "center"}} onInput={this.onChangeTitle} contentEditable="true">{this.props.title}</div>
+                <div style={{textAlign: "center", caretColor:'red'}} onInput={this.onChangeTitle} contentEditable="true">{this.props.title}</div>
                 <div contentEditable="true" onInput={this.onChangeBody}>{this.props.body}</div>
                 <button value={this.state} onClick={this.updateComponent}>Обновить</button> <button onClick={this.onDelete}>Удалить</button>
             </div>
