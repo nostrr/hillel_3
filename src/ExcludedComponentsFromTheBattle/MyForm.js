@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-function MyForm(){
+function MyForm() {
     const [validName, setValidName] = useState(false);
     const [validSurname, setValidSurname] = useState(false);
     const [validEmail, setValidEmail] = useState(false);
@@ -9,10 +9,10 @@ function MyForm(){
 
     useEffect(() => {
         validAllFields();
-    },[validName, validSurname,validEmail,validPassword]);
+    }, [validName, validSurname, validEmail, validPassword]);
 
-    function validationForm(nameField, validation){
-        switch (nameField){
+    function validationForm(nameField, validation) {
+        switch (nameField) {
             case 'Name':
                 setValidName(validation);
                 break;
@@ -30,39 +30,52 @@ function MyForm(){
         }
     }
 
-    function validAllFields(){
-        if(validName && validEmail && validPassword && validSurname){
+    function validAllFields() {
+        if (validName && validEmail && validPassword && validSurname) {
             setValidForm(true);
-        }else{
+        } else {
             setValidForm(false);
         }
     }
 
-    return(
-        <>
+    return (
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 'green',
+            borderStyle: 'dashed',
+            height: '100vh'
+        }}>
             <MyField validationField={validation.name} label='Name' validationForm={validationForm} type='text'/>
             <MyField validationField={validation.name} label='Surname' validationForm={validationForm} type='text'/>
             <MyField validationField={validation.email} label='Email' validationForm={validationForm} type='email'/>
-            <MyField validationField={validation.password} label='Pass' validationForm={validationForm} type='password'/>
-            <button disabled={!validForm}>Отправить</button>
-        </>
+            <MyField validationField={validation.password} label='Pass' validationForm={validationForm}
+                     type='password'/>
+            <div>
+                <button disabled={!validForm}>Отправить</button>
+            </div>
+        </div>
     );
 }
 
-function MyField(props){
+function MyField(props) {
     const [validationMessage, setValidationMessage] = useState('');
     const [value, setValue] = useState('');
-    function onChange(e){
-            setValue(e.target.value);
-            const validateField = props.validationField(e.target.value);
-            props.validationForm(props.label, validateField);
-            if(validateField){
-                setValidationMessage('');
-            }else{
-                setValidationMessage("Incorrect value.");
-            }
+
+    function onChange(e) {
+        setValue(e.target.value);
+        const validateField = props.validationField(e.target.value);
+        props.validationForm(props.label, validateField);
+        if (validateField) {
+            setValidationMessage('');
+        } else {
+            setValidationMessage("Incorrect value.");
+        }
     }
-    return(
+
+    return (
         <div>
             <label>{props.label}</label><br/>
             <input type={props.type} onChange={onChange} value={value}/><br/>
@@ -72,15 +85,15 @@ function MyField(props){
 }
 
 const validation = {
-    email: function(email){
-        const reg = /\S+@\S+\.\S+/;
+    email: function (email) {
+        const reg = /\S+@\S+\.\S+$/;
         return reg.test(email);
     },
-    password: function(password){
+    password: function (password) {
         const reg = /^(?=.*[A-Z])(?=.*\d).{6,10}$/;
         return reg.test(password);
     },
-    name: function(name){
+    name: function (name) {
         const reg = /^[A-Za-z]{2,}$/;
         return reg.test(name);
     }
