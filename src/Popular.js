@@ -3,7 +3,6 @@ import {fetchPopularRepos} from "./api";
 import {useSearchParams} from "react-router-dom";
 
 
-
 const Popular = () => {
     const [selectedLanguage, setSelectedLanguage] = useState("All");
     const [repos, setRepos] = useState([]);
