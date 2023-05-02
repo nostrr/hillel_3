@@ -13,7 +13,7 @@ const Results = () => {
     const playerNameOne = searchParams.get('playerOneName');
     const playerNameTwo = searchParams.get('playerTwoName');
 
-    useEffect(async() => {
+    useEffect(() => {
         const getBattleResult = async () => {
             try {
                 const players = await battle([playerNameOne, playerNameTwo]);
