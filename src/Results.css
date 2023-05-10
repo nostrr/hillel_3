@@ -1,11 +1,12 @@
 .flex-container{
     display: flex;
-    border: #61dafb dotted medium;
+    border: #61dafb;
     height: 90vh;
     background-color: yellow;
     flex-flow: row nowrap;
     justify-content: space-evenly;
     align-items: center;
+    border-radius: 50%;
 }
 
 .item-1{
