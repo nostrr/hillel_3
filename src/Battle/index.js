@@ -2,28 +2,18 @@ import PlayerInput from "./PlayerInput";
 import {useState} from "react";
 import PlayerPreview from "./PlayerPreview";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {cleanPlayerData, setPlayerData} from "../redux/battle.actions";
 
 const Battle = () => {
-    const [playerData, setPlayerData] = useState({
-        playerOneName: '',
-        playerOneImage: null,
-        playerTwoName: '',
-        playerTwoImage: null
-    });
+    const dispatch = useDispatch();
+    const playerData = useSelector((state) => state.battle.playerData);
     const handleSubmit = (id, userName) => {
-        setPlayerData((prevState) => ({
-            ...prevState,
-            [`${id}Name`]: userName,
-            [`${id}Image`]: `https://github.com/${userName}.png?size=200`
-        }));
+        dispatch(setPlayerData({id,userName}));
     }
 
     const handleReset = (id) => {
-        setPlayerData((prevState) => ({
-            ...prevState,
-            [`${id}Name`]: '',
-            [`${id}Image`]: null
-        }));
+        dispatch(cleanPlayerData(id));
     }
 
     return (

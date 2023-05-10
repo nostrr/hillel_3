@@ -3,7 +3,7 @@ import Home from "./Home";
 import Popular from "./Popular";
 import Battle from "./Battle";
 import Nav from "./Nav";
-import Results from "./Results";
+import Results from "./Result";
 
 const router = createBrowserRouter([
     {

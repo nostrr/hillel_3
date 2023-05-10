@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import  MyApp from './ExcludedComponentsFromTheBattle/MyApp';
 import reportWebVitals from './reportWebVitals';
-import {List} from "./ExcludedComponentsFromTheBattle/List";
-import {Form} from "./ExcludedComponentsFromTheBattle/MyForm";
 import App from "./App";
 import {Provider} from "react-redux";
 import store from "./redux/store";

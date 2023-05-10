@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import './Results.css'
-import {battle} from "./api";
-import PlayerPreview from "./PlayerPreview";
+import {battle} from "../api";
+import {Loader} from "../Loader";
+import {ResultPanel} from "./ResultPanel";
 
 const Results = () => {
     const [searchParams] = useSearchParams();
@@ -51,47 +52,6 @@ const Results = () => {
             {contentOrError(error)}
         </div>
     )
-}
-
-function ResultPanel({result, player}) {
-    const textColorStyle = {
-        color: result == 'Winner' ? 'green' : 'red',
-        textAlign: "center"
-    };
-    return (
-        <div style={{display: "flex", flexDirection: "column"}}>
-            <h2 style={textColorStyle}>{result}</h2>
-            <PlayerPreview avatar={player ? player.profile.avatar_url : ''}
-                           userName={player ? player.profile.login : ''}>
-                <OtherInfo profile={player.profile} score={player.score}/>
-            </PlayerPreview>
-        </div>
-    )
-}
-
-function OtherInfo({profile, score}) {
-    return (
-        <div style={{textAlign: "center"}}>
-            <ul>
-                <li><b>Stars: {score}</b></li>
-                <li>Name: {profile.name}</li>
-                <li>Location: {profile.location}</li>
-                <li>Company: {profile.company}</li>
-                <li>Followers: {profile.followers}</li>
-                <li>Following: {profile.following}</li>
-                <li>Public repos: {profile.public_repos}</li>
-                <li>Blog: {profile.blog}</li>
-            </ul>
-        </div>
-    )
-}
-
-function Loader() {
-    return (
-        <div className="loader-container">
-            <div className="loader"/>
-        </div>
-    );
 }
 
 export default Results;
