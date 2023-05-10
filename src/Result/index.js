@@ -1,37 +1,21 @@
 import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import './Results.css'
-import {battle} from "../api";
 import {Loader} from "../Loader";
 import {ResultPanel} from "./ResultPanel";
+import {useDispatch, useSelector} from "react-redux";
+import {startBattle} from "../redux/result.thunk";
 
 const Results = () => {
     const [searchParams] = useSearchParams();
-    const [winPlayer, setWinPlayer] = useState(null);
-    const [losePlayer, setLosePlayer] = useState(null);
-    const [error, setError] = useState(null);
-    const [showLoader, setShowLoader] = useState(true);
     const playerNameOne = searchParams.get('playerOneName');
     const playerNameTwo = searchParams.get('playerTwoName');
+    const dispatch = useDispatch();
+    const error = useSelector((state) => state.result.error);
+    const showLoader = useSelector((state) => state.result.showLoader);
 
     useEffect(() => {
-        const getBattleResult = async () => {
-            try {
-                const players = await battle([playerNameOne, playerNameTwo]);
-                if (players.length == 2) {
-                    setShowLoader(false);
-                    setWinPlayer(players[0]);
-                    setLosePlayer(players[1]);
-                }
-            } catch (error) {
-                console.log(error);
-                setError(error);
-                setShowLoader(false);
-            }
-        }
-        getBattleResult();
-
-
+        dispatch(startBattle(playerNameOne, playerNameTwo));
     }, []);
 
     const contentOrError = (errorMessage) => {
@@ -41,8 +25,8 @@ const Results = () => {
         return (
             showLoader ? <Loader/> :
                 <>
-                    <ResultPanel result='Winner' player={winPlayer}/>
-                    <ResultPanel result='Loser' player={losePlayer}/>
+                    <ResultPanel result='Winner'/>
+                    <ResultPanel result='Loser'/>
                 </>
         )
     }

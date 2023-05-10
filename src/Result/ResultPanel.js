@@ -1,7 +1,9 @@
 import PlayerPreview from "../Battle/PlayerPreview";
 import {OtherInfo} from "./OtherInfo";
+import {useSelector} from "react-redux";
 
-export function ResultPanel({result, player}) {
+export function ResultPanel({result}) {
+    const player = useSelector((state)=> result ==='Winner'? state.result.winPlayer : state.result.losePlayer);
     const textColorStyle = {
         color: result == 'Winner' ? 'green' : 'red',
         textAlign: "center"

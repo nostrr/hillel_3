@@ -1,5 +1,5 @@
 import {fetchPopularRepos} from "../api";
-import {setError, setRepos, setShowLoader} from "../redux/popular.actions";
+import {setError, setRepos, setShowLoader} from "./popular.actions";
 
 export const getRepos = (selectedLanguage) => (dispatch) => {
     dispatch(setShowLoader())

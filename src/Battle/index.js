@@ -1,5 +1,4 @@
 import PlayerInput from "./PlayerInput";
-import {useState} from "react";
 import PlayerPreview from "./PlayerPreview";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,9 +7,6 @@ import {cleanPlayerData, setPlayerData} from "../redux/battle.actions";
 const Battle = () => {
     const dispatch = useDispatch();
     const playerData = useSelector((state) => state.battle.playerData);
-    const handleSubmit = (id, userName) => {
-        dispatch(setPlayerData({id,userName}));
-    }
 
     const handleReset = (id) => {
         dispatch(cleanPlayerData(id));
@@ -23,7 +19,6 @@ const Battle = () => {
                     <PlayerInput
                         id='playerOne'
                         label='Player 1'
-                        onSubmit={handleSubmit}
                     /> :
                     <PlayerPreview
                         avatar={playerData.playerOneImage}
@@ -40,7 +35,6 @@ const Battle = () => {
                     <PlayerInput
                         id='playerTwo'
                         label='Player 2'
-                        onSubmit={handleSubmit}
                     /> :
                     <PlayerPreview
                         avatar={playerData.playerTwoImage}

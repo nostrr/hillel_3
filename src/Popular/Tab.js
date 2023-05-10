@@ -2,7 +2,7 @@ import {setSelectedLanguage} from "../redux/popular.actions";
 import {useSearchParams} from "react-router-dom";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getRepos} from "./popular.thunk";
+import {getRepos} from "../redux/popular.thunk";
 
 const languages = ["All", "Javascript", "Ruby", "Java", "CSS", "Python", "C#"];
 

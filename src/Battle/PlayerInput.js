@@ -1,7 +1,7 @@
 import {setPlayerData, setPlayerDataNameTemp} from "../redux/battle.actions";
 import {useDispatch, useSelector} from "react-redux";
 
-const PlayerInput = ({id, label, onSubmit}) => {
+const PlayerInput = ({id, label}) => {
     const dispatch = useDispatch();
     const tempName = useSelector((state) => state.battle.playerData[id + 'NameTemp']);
     const userName = useSelector((state) => state.battle.playerData[id + 'Name']);
