@@ -1,3 +1,6 @@
+import {POPULAR_ENTITY} from "./popular.actions";
+
+
 const initialState = {
     selectedLanguage: 'All',
     showLoader: false,
@@ -7,24 +10,24 @@ const initialState = {
 
 export const popularReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_SELECTED_LANGUAGE':
+        case POPULAR_ENTITY.SET_SELECTED_LANGUAGE:
             return {
                 ...state,
                 selectedLanguage: action.payload
             };
-        case 'SET_REPOS':
+        case POPULAR_ENTITY.SET_REPOS:
             return {
                 ...state,
                 repos: action.payload,
                 showLoader: false,
             };
-        case 'SET_SHOW_LOADER':
+        case POPULAR_ENTITY.SET_SHOW_LOADER:
             return {
                 ...state,
                 showLoader: true,
                 error: null
             };
-        case 'SET_ERROR':
+        case POPULAR_ENTITY.SET_ERROR:
             return {
                 ...state,
                 showLoader: false,
