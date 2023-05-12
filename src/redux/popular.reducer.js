@@ -1,4 +1,5 @@
-import {POPULAR_ENTITY} from "./popular.actions";
+import {createSlice} from "@reduxjs/toolkit";
+import {getRepos} from "./popular.thunk";
 
 
 const initialState = {
@@ -8,32 +9,30 @@ const initialState = {
     error: null
 }
 
-export const popularReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case POPULAR_ENTITY.SET_SELECTED_LANGUAGE:
-            return {
-                ...state,
-                selectedLanguage: action.payload
-            };
-        case POPULAR_ENTITY.SET_REPOS:
-            return {
-                ...state,
-                repos: action.payload,
-                showLoader: false,
-            };
-        case POPULAR_ENTITY.SET_SHOW_LOADER:
-            return {
-                ...state,
-                showLoader: true,
-                error: null
-            };
-        case POPULAR_ENTITY.SET_ERROR:
-            return {
-                ...state,
-                showLoader: false,
-                error: action.payload
-            }
-        default:
-            return state;
+const popularSlice = createSlice({
+    name: 'popular',
+    initialState,
+    reducers: {
+        setSelectedLanguage: (state, action) => {
+            state.selectedLanguage = action.payload;
+        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getRepos.pending, (state) => {
+                state.showLoader = true;
+                state.error = null;
+            })
+            .addCase(getRepos.fulfilled, (state, action) => {
+                state.repos = action.payload;
+                state.showLoader = false;
+            })
+            .addCase(getRepos.rejected, (state, action) => {
+                state.showLoader = false;
+                state.error = action.payload;
+            });
     }
-}
+})
+
+export default popularSlice.reducer;
+export const {setSelectedLanguage} = popularSlice.actions;

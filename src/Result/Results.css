@@ -1,4 +1,4 @@
-.flex-container{
+.flex-container {
     display: flex;
     border: #61dafb;
     height: 90vh;
@@ -9,7 +9,7 @@
     border-radius: 50%;
 }
 
-.item-1{
+.item-1 {
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,8 @@
     justify-content: center;
     align-items: center;
 }
-.item-2{
+
+.item-2 {
     display: flex;
     border-radius: 50%;
     background-color: red;
@@ -26,24 +27,25 @@
     align-items: center;
 }
 
-.item-3{
+.item-3 {
     display: flex;
     border-radius: 50%;
     background: linear-gradient(45deg, white, red);
     justify-content: center;
     align-items: center;
 }
-.item-4{
+
+.item-4 {
     border-radius: 50%;
     background-color: purple;
 }
 
-.item-5{
+.item-5 {
     border-radius: 50%;
     background-color: greenyellow;
 }
 
-.flex-item{
+.flex-item {
     width: calc(33.33% - 10px);
     margin: 5px;
 }

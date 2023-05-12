@@ -1,5 +1,7 @@
+import {createSlice} from "@reduxjs/toolkit";
+
 const initialState = {
-    playerData : {
+    playerData: {
         playerOneName: '',
         playerOneImage: null,
         playerOneNameTemp: '',
@@ -9,28 +11,25 @@ const initialState = {
     }
 }
 
-export const battleReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'SET_PLAYER_DATA':
-            return {
-                ...state,
-                playerData:{...state.playerData,
-                    [`${action.payload.id}Name`]: action.payload.userName,
-                    [`${action.payload.id}Image`]: `https://github.com/${action.payload.userName}.png?size=200`},
-            };
-        case 'CLEAN_PLAYER_DATA':
-            return {
-                ...state,
-                playerData: {...state.playerData,[`${action.payload}Name`]: '', [`${action.payload}Image`]: null}
-            }
-        case 'SET_PLAYER_DATA_NAME_TEMP':
-            return {
-                ...state,
-                playerData: {...state.playerData,
-                    [`${action.payload.id}NameTemp`]: action.payload.userName
-                }
-            }
-        default:
-            return state;
+
+const battleSlice = createSlice({
+    name: 'battle',
+    initialState,
+    reducers: {
+        setPlayerData: (state, action) => {
+            state.playerData[`${action.payload.id}Name`] = action.payload.userName;
+            state.playerData[`${action.payload.id}Image`] = `https://github.com/${action.payload.userName}.png?size=200`
+        },
+        cleanPlayerData: (state, action) => {
+            state.playerData[`${action.payload}Name`] = '';
+            state.playerData[`${action.payload}Image`] = null;
+        },
+        setPlayerDataNameTemp: (state, action) => {
+            state.playerData[`${action.payload.id}NameTemp`] = action.payload.userName;
+        }
     }
-}
+})
+
+
+export default battleSlice.reducer;
+export const {setPlayerData, cleanPlayerData, setPlayerDataNameTemp} = battleSlice.actions;

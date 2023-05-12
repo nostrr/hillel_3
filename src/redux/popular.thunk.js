@@ -1,15 +1,7 @@
 import {fetchPopularRepos} from "../api";
-import {setError, setRepos, setShowLoader} from "./popular.actions";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 
-export const getRepos = (selectedLanguage) => (dispatch) => {
-    dispatch(setShowLoader())
-    fetchPopularRepos(selectedLanguage)
-        .then(data => {
-            dispatch(setRepos(data));
-        })
-        .catch(error => {
-            dispatch(setError(error.message));
-        })
-        .finally(() => {
-        })
-}
+export const getRepos = createAsyncThunk(
+    'popular/getRepos',
+    async (selectedLanguage) =>  await fetchPopularRepos(selectedLanguage)
+);

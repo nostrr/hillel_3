@@ -2,7 +2,9 @@ import PlayerInput from "./PlayerInput";
 import PlayerPreview from "./PlayerPreview";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {cleanPlayerData, setPlayerData} from "../redux/battle.actions";
+import {cleanPlayerData} from "../redux/battle.reducer";
+
+
 
 const Battle = () => {
     const dispatch = useDispatch();

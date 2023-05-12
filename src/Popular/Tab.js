@@ -1,4 +1,4 @@
-import {setSelectedLanguage} from "../redux/popular.actions";
+import {setSelectedLanguage} from "../redux/popular.reducer";
 import {useSearchParams} from "react-router-dom";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";

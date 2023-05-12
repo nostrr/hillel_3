@@ -1,15 +1,12 @@
 import {battle} from "../api";
-import {setLoadPlayer, setShowLoader, throwError} from "./result.actions";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 
-export const  startBattle =(playerNameOne, playerNameTwo) => async (dispatch)=>{
-    dispatch(setShowLoader());
-    try {
+export const startBattle = createAsyncThunk(
+    'result/startBattle',
+    async ([playerNameOne,playerNameTwo]) => {
         const players = await battle([playerNameOne, playerNameTwo]);
-        if (players.length == 2) {
-            dispatch(setLoadPlayer({players}))
+        if (players.length === 2) {
+            return {players};
         }
-    } catch (error) {
-        console.log(error);
-        dispatch(throwError({error}))
     }
-}
+)

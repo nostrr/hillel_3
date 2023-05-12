@@ -1,4 +1,4 @@
-import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "./Home";
 import Popular from "./Popular";
 import Battle from "./Battle";
@@ -11,32 +11,32 @@ const router = createBrowserRouter([
         element: <div>
             <Nav/>
         </div>,
-        children:[
+        children: [
             {
                 path: "/",
                 element: <Home/>,
             },
             {
-                path:"/popular",
-                element:<Popular/>
+                path: "/popular",
+                element: <Popular/>
             },
             {
-                path:"/battle",
-                element:<Battle/>
+                path: "/battle",
+                element: <Battle/>
             },
             {
-                path:"/battle/results",
-                element:<Results/>
+                path: "/battle/results",
+                element: <Results/>
             },
             {
-                path:"*",
-                element:<h2>Error...</h2>
-           }
+                path: "*",
+                element: <h2>Error...</h2>
+            }
         ]
     },
 
 ])
 
-const App=() => <RouterProvider router={router}/>
+const App = () => <RouterProvider router={router}/>
 
 export default App;

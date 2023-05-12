@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
 import './Results.css'
 import {Loader} from "../Loader";
@@ -15,7 +15,7 @@ const Results = () => {
     const showLoader = useSelector((state) => state.result.showLoader);
 
     useEffect(() => {
-        dispatch(startBattle(playerNameOne, playerNameTwo));
+        dispatch(startBattle([playerNameOne, playerNameTwo]));
     }, []);
 
     const contentOrError = (errorMessage) => {
