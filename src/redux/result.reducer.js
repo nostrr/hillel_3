@@ -24,7 +24,7 @@ const resultReducer = createSlice({
             })
             .addCase(startBattle.rejected, (state, action) => {
                 state.showLoader = false;
-                state.error = action.payload.error;
+                state.error = action.error;
             });
     }
 });
