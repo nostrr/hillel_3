@@ -1,11 +1,12 @@
 import {NavLink, Outlet} from "react-router-dom";
+import {FC, ReactElement} from "react";
 
-const navLinks = ["Home", "Popular", "Battle"];
-const Nav = () => {
+const navLinks: string[] = ["Home", "Popular", "Battle"];
+const Nav: FC = (): ReactElement => {
     return (
         <div className="container">
             <ul className='nav'>
-                {navLinks.map((navLink, index) => (
+                {navLinks.map((navLink: string, index: number) => (
                     <li key={index}>
                         <NavLink to={navLink !== "Home" ? navLink.toLowerCase() : "/"}>
                             {navLink}

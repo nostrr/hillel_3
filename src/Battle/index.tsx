@@ -3,14 +3,16 @@ import PlayerPreview from "./PlayerPreview";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {cleanPlayerData} from "../redux/battle.reducer";
+import {FC, ReactElement} from "react";
+import {RootState} from '../redux/store';
 
 
 
-const Battle = () => {
+const Battle: FC = (): ReactElement => {
     const dispatch = useDispatch();
-    const playerData = useSelector((state) => state.battle.playerData);
+    const playerData = useSelector((state: RootState) => state.battle.playerData);
 
-    const handleReset = (id) => {
+    const handleReset = (id:string) => {
         dispatch(cleanPlayerData(id));
     }
 

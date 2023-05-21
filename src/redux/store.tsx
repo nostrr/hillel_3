@@ -10,9 +10,9 @@ const logger = createLogger({
 
 const store = configureStore({
     reducer: {
-        popular : popularReduce,
+        popular: popularReduce,
         battle: battleReducer,
-        result: resultReducer
+        result: resultReducer,
     },
     middleware: (getDefaultMiddleware) => {
         return  getDefaultMiddleware().concat(logger);
@@ -20,4 +20,5 @@ const store = configureStore({
 })
 
 export default store;
+export type RootState = ReturnType<typeof store.getState>;
 

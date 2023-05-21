@@ -4,6 +4,7 @@ import Popular from "./Popular";
 import Battle from "./Battle";
 import Nav from "./Nav";
 import Results from "./Result";
+import {FC, ReactElement} from "react";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,6 @@ const router = createBrowserRouter([
 
 ])
 
-const App = () => <RouterProvider router={router}/>
+const App : FC = () : ReactElement => <RouterProvider router={router}/>
 
 export default App;

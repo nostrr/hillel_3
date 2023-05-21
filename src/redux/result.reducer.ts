@@ -1,25 +1,34 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {startBattle} from "./result.thunk";
+import {createSlice, PayloadAction, Slice} from "@reduxjs/toolkit";
+import {startBattle, StartBattleResult} from "./result.thunk";
 
-const initialState = {
+interface IInitialState {
+    winPlayer: any,
+    losePlayer: any,
+    error: any,
+    showLoader: boolean | null
+}
+
+const initialState : IInitialState = {
     winPlayer: null,
     losePlayer: null,
     error: null,
     showLoader: true
 }
 
-const resultReducer = createSlice({
+
+const resultReducer:Slice<IInitialState> = createSlice({
     name: 'result',
     initialState: initialState,
+    reducers:{},
     extraReducers: (builder) => {
         builder
             .addCase(startBattle.pending, (state) => {
                 state.showLoader = true;
                 state.error = null;
             })
-            .addCase(startBattle.fulfilled, (state, action) => {
-                state.winPlayer = action.payload.players[0];
-                state.losePlayer = action.payload.players[1];
+            .addCase(startBattle.fulfilled, (state, action:PayloadAction<StartBattleResult | undefined>) => {
+                state.winPlayer = action.payload?.players[0];
+                state.losePlayer = action.payload?.players[1];
                 state.showLoader = false
             })
             .addCase(startBattle.rejected, (state, action) => {
