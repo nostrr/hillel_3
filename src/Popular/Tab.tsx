@@ -1,17 +1,18 @@
 import {setSelectedLanguage} from "../redux/popular.reducer";
 import {useSearchParams} from "react-router-dom";
-import {useEffect} from "react";
+import {Dispatch, FC, ReactElement, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getRepos} from "../redux/popular.thunk";
+import {RootState} from '../redux/store';
 
-const languages = ["All", "Javascript", "Ruby", "Java", "CSS", "Python", "C#"];
+const languages: string[] = ["All", "Javascript", "Ruby", "Java", "CSS", "Python", "C#"];
 
-export function Tab() {
+export const Tab: FC = (): ReactElement => {
     const [searchParams] = useSearchParams();
-    const showLoader = useSelector((state) => state.popular.showLoader);
-    const dispatch = useDispatch();
+    const showLoader: boolean = useSelector((state: RootState) => state.popular.showLoader);
+    const dispatch: Dispatch<any> = useDispatch(); //TODO Убрать эни.
     const activeTabFromSearchParams = searchParams.get('tab');
-    const selectedLanguage = useSelector((state) => state.popular.selectedLanguage);
+    const selectedLanguage: string = useSelector((state: RootState) => state.popular.selectedLanguage);
 
     useEffect(() => {
         if (activeTabFromSearchParams) {
@@ -23,7 +24,7 @@ export function Tab() {
         dispatch(getRepos(selectedLanguage));
     }, [selectedLanguage]);
 
-    const onClickHandler = (language) => {
+    const onClickHandler = (language: string) => {
         if (!showLoader) {
             dispatch(setSelectedLanguage(language));
             searchParams.set('tab', language);
@@ -32,7 +33,7 @@ export function Tab() {
     }
     return (
         <ul className="languages">
-            {languages.map((language, index) => (
+            {languages.map((language: string, index: number) => (
                 <li key={index}
                     style={{color: language === selectedLanguage ? '#d0021b' : '#000000'}}
                     onClick={() => onClickHandler(language)}>

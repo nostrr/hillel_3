@@ -1,18 +1,25 @@
 import {useDispatch, useSelector} from "react-redux";
 import {setPlayerData, setPlayerDataNameTemp} from "../redux/battle.reducer";
+import {ChangeEvent, FC, FormEvent, ReactElement} from "react";
+import {RootState} from "../redux/store";
 
-const PlayerInput = ({id, label}) => {
+interface PlayerInputProps {
+    id: 'playerOne' | 'playerTwo';//TODO как то заменить можно?
+    label: string;
+}
+
+const PlayerInput: FC<PlayerInputProps> = ({id, label}) : ReactElement => {
     const dispatch = useDispatch();
-    const tempName = useSelector((state) => state.battle.playerData[id + 'NameTemp']);
+    const tempName = useSelector((state: RootState) => state.battle.playerData[`${id}NameTemp`]);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(setPlayerData({
             id,
             userName: tempName
         }));
     }
-    const onChange = (event) => {
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(setPlayerDataNameTemp({id, userName: event.target.value}))
     }
 

@@ -1,4 +1,11 @@
-export function Repository(props) {
+import {FC, ReactElement} from "react";
+import {RepoData} from "../api";
+interface IRepositoryProps{
+    index: number;
+    repo: RepoData
+}
+
+export const  Repository : FC<IRepositoryProps> =(props): ReactElement => {
     return (
         <li className='popular-item'>
             <div className='popular-rank'>#{props.index + 1}</div>

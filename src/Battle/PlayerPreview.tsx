@@ -1,4 +1,12 @@
-const PlayerPreview = ({avatar, userName, children}) => {
+import {FC, ReactElement, ReactNode} from "react";
+
+interface PlayerPreviewProps {
+    avatar: string;
+    userName: string;
+    children: ReactNode;
+}
+
+const PlayerPreview: FC<PlayerPreviewProps>= ({avatar, userName, children}): ReactElement=> {
     return (
         <div>
             <div className='column'>

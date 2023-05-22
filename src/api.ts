@@ -48,7 +48,7 @@ const calculateScore = (profile: any, repos: any[]) => {
 
     return followers * totalStars;
 }
-// TODO
+// TODO После if нету ретурна выдает ошибку если не поставить эни, как грамотно написать?
 const getUserData = async (userName: string): Promise<any> => {
     try {
         const [profile, repos] = await Promise.all([

@@ -1,12 +1,19 @@
 import PlayerPreview from "../Battle/PlayerPreview";
 import {OtherInfo} from "./OtherInfo";
 import {useSelector} from "react-redux";
+import {CSSProperties, FC, ReactElement} from "react";
+import {RootState} from "../redux/store";
+import {Player} from "../api";
 
-export function ResultPanel({result}) {
-    const player = useSelector((state) => result === 'Winner' ? state.result.winPlayer : state.result.losePlayer);
-    const textColorStyle = {
+interface ResultPanelProps {
+    result: string;
+}
+
+export const ResultPanel: FC<ResultPanelProps> = ({result}): ReactElement => {
+    const player: Player = useSelector((state: RootState) => result === 'Winner' ? state.result.winPlayer : state.result.losePlayer);
+    const textColorStyle:CSSProperties  = {
         color: result === 'Winner' ? 'green' : 'red',
-        textAlign: "center"
+        textAlign: 'center'
     };
     return (
         <div style={{display: "flex", flexDirection: "column"}}>

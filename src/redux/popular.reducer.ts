@@ -1,19 +1,25 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction, Slice} from "@reduxjs/toolkit";
 import {getRepos} from "./popular.thunk";
 
+interface IPopularState {
+    selectedLanguage: string;
+    showLoader: boolean;
+    repos: any[]; // Здесь следует указать более конкретный тип для `repos`
+    error: string | null;
+}
 
-const initialState = {
+const initialState: IPopularState = {
     selectedLanguage: 'All',
     showLoader: false,
     repos: [],
     error: null
 }
 
-const popularSlice = createSlice({
+const popularSlice: Slice<IPopularState> = createSlice({
     name: 'popular',
-    initialState,
+    initialState: initialState,
     reducers: {
-        setSelectedLanguage: (state, action) => {
+        setSelectedLanguage: (state, action: PayloadAction<string>) => {
             state.selectedLanguage = action.payload;
         }
     },
@@ -29,7 +35,7 @@ const popularSlice = createSlice({
             })
             .addCase(getRepos.rejected, (state, action) => {
                 state.showLoader = false;
-                state.error = action.payload;
+                state.error = action.payload as string;
             });
     }
 })

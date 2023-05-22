@@ -1,4 +1,8 @@
-export function OtherInfo({profile, score}) {
+import {FC, ReactElement} from "react";
+import {Player} from "../api";
+
+
+export const OtherInfo: FC<Player> = ({profile, score}): ReactElement => {
     return (
         <div style={{textAlign: "center"}}>
             <ul>
