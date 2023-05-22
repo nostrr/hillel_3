@@ -3,12 +3,12 @@ import {setPlayerData, setPlayerDataNameTemp} from "../redux/battle.reducer";
 import {ChangeEvent, FC, FormEvent, ReactElement} from "react";
 import {RootState} from "../redux/store";
 
-interface PlayerInputProps {
+interface IPlayerInputProps {
     id: 'playerOne' | 'playerTwo';//TODO как то заменить можно?
     label: string;
 }
 
-const PlayerInput: FC<PlayerInputProps> = ({id, label}) : ReactElement => {
+const PlayerInput: FC<IPlayerInputProps> = ({id, label}): ReactElement => {
     const dispatch = useDispatch();
     const tempName = useSelector((state: RootState) => state.battle.playerData[`${id}NameTemp`]);
 

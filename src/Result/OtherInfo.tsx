@@ -1,8 +1,8 @@
 import {FC, ReactElement} from "react";
-import {Player} from "../api";
+import {IPlayer} from "../api";
 
 
-export const OtherInfo: FC<Player> = ({profile, score}): ReactElement => {
+export const OtherInfo: FC<IPlayer> = ({profile, score}): ReactElement => {
     return (
         <div style={{textAlign: "center"}}>
             <ul>

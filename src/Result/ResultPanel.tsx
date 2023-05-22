@@ -3,14 +3,14 @@ import {OtherInfo} from "./OtherInfo";
 import {useSelector} from "react-redux";
 import {CSSProperties, FC, ReactElement} from "react";
 import {RootState} from "../redux/store";
-import {Player} from "../api";
+import {IPlayer} from "../api";
 
-interface ResultPanelProps {
+interface IResultPanelProps {
     result: string;
 }
 
-export const ResultPanel: FC<ResultPanelProps> = ({result}): ReactElement => {
-    const player: Player = useSelector((state: RootState) => result === 'Winner' ? state.result.winPlayer : state.result.losePlayer);
+export const ResultPanel: FC<IResultPanelProps> = ({result}): ReactElement => {
+    const player: IPlayer = useSelector((state: RootState) => result === 'Winner' ? state.result.winPlayer : state.result.losePlayer);
     const textColorStyle:CSSProperties  = {
         color: result === 'Winner' ? 'green' : 'red',
         textAlign: 'center'

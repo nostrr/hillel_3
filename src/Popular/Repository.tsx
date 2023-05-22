@@ -1,8 +1,8 @@
 import {FC, ReactElement} from "react";
-import {RepoData} from "../api";
+import {IRepoData} from "../api";
 interface IRepositoryProps{
     index: number;
-    repo: RepoData
+    repo: IRepoData
 }
 
 export const  Repository : FC<IRepositoryProps> =(props): ReactElement => {

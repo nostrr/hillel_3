@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 
 const handleError = (error: Error) => console.error(error);
 
-export interface RepoData {
+export interface IRepoData {
     id: number;
     name: string;
     html_url: string;
@@ -11,6 +11,21 @@ export interface RepoData {
         avatar_url: string;
     };
     stargazers_count: number;
+}
+
+export interface IPlayer {
+    profile: {
+        avatar_url: string;
+        login: string;
+        name: string;
+        location: string;
+        company: string;
+        followers: number;
+        following: number;
+        public_repos: number;
+        blog: string;
+    };
+    score: number;
 }
 
 
@@ -67,27 +82,12 @@ const getUserData = async (userName: string): Promise<any> => {
     }
 }
 
-export interface Player {
-    profile: {
-        avatar_url: string;
-        login: string;
-        name: string;
-        location: string;
-        company: string;
-        followers: number;
-        following: number;
-        public_repos: number;
-        blog: string;
-    };
-    score: number;
-}
 
+const sortPlayers = (players: IPlayer[]) => players.sort((a: IPlayer, b: IPlayer) => b.score - a.score);
 
-const sortPlayers = (players: Player[]) => players.sort((a: Player, b: Player) => b.score - a.score);
-
-export const battle = async (players: string[]):Promise<Player[] | undefined> => {
+export const battle = async (players: string[]): Promise<IPlayer[] | undefined> => {
     try {
-        const battleResult: Player[] = await Promise.all(players.map(getUserData));
+        const battleResult: IPlayer[] = await Promise.all(players.map(getUserData));
 
         if (battleResult) {
             return sortPlayers(battleResult);
@@ -97,7 +97,7 @@ export const battle = async (players: string[]):Promise<Player[] | undefined> =>
     }
 }
 
-export const fetchPopularRepos = (language: string): Promise<RepoData[]> => {
+export const fetchPopularRepos = (language: string): Promise<IRepoData[]> => {
     const encodingURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=starts&order=desc&type=Repositories`);
     return axios.get(encodingURI)
         .then((response: AxiosResponse<any>) => response.data.items)

@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction, Slice} from "@reduxjs/toolkit";
-import {startBattle, StartBattleResult} from "./result.thunk";
+import {startBattle, IStartBattleResult} from "./result.thunk";
 
 interface IInitialState {
     winPlayer: any,
@@ -26,7 +26,7 @@ const resultReducer:Slice<IInitialState> = createSlice({
                 state.showLoader = true;
                 state.error = null;
             })
-            .addCase(startBattle.fulfilled, (state, action:PayloadAction<StartBattleResult | undefined>) => {
+            .addCase(startBattle.fulfilled, (state, action:PayloadAction<IStartBattleResult | undefined>) => {
                 state.winPlayer = action.payload?.players[0];
                 state.losePlayer = action.payload?.players[1];
                 state.showLoader = false

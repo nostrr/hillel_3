@@ -1,17 +1,6 @@
 import {createSlice, PayloadAction, Slice} from "@reduxjs/toolkit";
 
-// const initialState = {
-//     playerData: {
-//         playerOneName: '',
-//         playerOneImage: null,
-//         playerOneNameTemp: '',
-//         playerTwoName: '',
-//         playerTwoImage: null,
-//         playerTwoNameTemp: '',
-//     }
-// }
-
-interface IPlayerData {
+export interface IPlayerData {
     playerOneName: string;
     playerOneImage: null | string;
     playerOneNameTemp: string;

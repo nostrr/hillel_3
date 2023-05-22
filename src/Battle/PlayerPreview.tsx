@@ -1,12 +1,12 @@
 import {FC, ReactElement, ReactNode} from "react";
 
-interface PlayerPreviewProps {
+interface IPlayerPreviewProps {
     avatar: string;
     userName: string;
     children: ReactNode;
 }
 
-const PlayerPreview: FC<PlayerPreviewProps>= ({avatar, userName, children}): ReactElement=> {
+const PlayerPreview: FC<IPlayerPreviewProps>= ({avatar, userName, children}): ReactElement=> {
     return (
         <div>
             <div className='column'>

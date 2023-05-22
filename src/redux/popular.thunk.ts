@@ -1,7 +1,7 @@
-import {fetchPopularRepos, RepoData} from "../api";
+import {fetchPopularRepos, IRepoData} from "../api";
 import {AsyncThunk, createAsyncThunk} from "@reduxjs/toolkit";
 
-export const getRepos: AsyncThunk<RepoData[], string, {}> = createAsyncThunk<RepoData[], string>(
+export const getRepos: AsyncThunk<IRepoData[], string, {}> = createAsyncThunk<IRepoData[], string>(
     'popular/getRepos',
-    async (selectedLanguage: string): Promise<RepoData[]> => await fetchPopularRepos(selectedLanguage)
+    async (selectedLanguage: string): Promise<IRepoData[]> => await fetchPopularRepos(selectedLanguage)
 );
